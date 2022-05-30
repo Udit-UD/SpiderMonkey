@@ -1,1 +1,1 @@
-web : gunicorn SpiderMonkey.wsgi
+web : gunicorn SpiderMonkey.wsgi --log-file-
