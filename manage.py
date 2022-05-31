@@ -20,3 +20,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# web: gunicorn SpiderMonkey.wsgi --log-file-
