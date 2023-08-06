@@ -6,9 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SpiderMonkey</title>
-    <link rel="shortcut icon" type="image" href="{% static 'Images\uplogo.png' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'Images/uplogo.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <script src="{% static 'script.js' %}" type="text/javascript"></script>  
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 </head>
@@ -101,7 +100,7 @@
             align-items: center;
             width: 100%;
             height: 25px;
-            color: white;    ;
+            color: white;    
         }
         .line::before{
             content: "";
@@ -112,15 +111,52 @@
             opacity: 0.7;
             z-index: -1;
         }
-        .slide{
-            position: relative;   
-            width: 100%;
-            height: 520px;
+        .cont {
+            overflow: hidden; 
+        }
+
+        .slide {
+            position: relative;
+            width: 500%;
+            margin: 0;
+            padding: 0;
+            left: 0;
+            animation: 20s transit infinite;
+        }
+        @keyframes transit {
+            0%{
+                left: 0%;
+            }
+            20%{
+                left: 0%;
+            }
+            25%{
+                left: -100%;
+            }
+            45%{
+                left: -100%;
+            }
+            50%{
+                left: -200%;
+            }
+            70%{
+                left: -200%;
+            }
+            75%{
+                left: -300%;
+            }
+            95%{
+                left: -300%;
+            }
+            100%{
+                left: -400%;
+            }
         }
         .slide img{
-            width: 100%;
-            height: 470px;
             z-index: -1;
+            height: 50vh;
+            width: 20%;
+            float: left;
         }
         #diff{
             color: white;
@@ -128,27 +164,8 @@
         #diff2{
             color: aqua;
         }
-        .arrwo{
-            cursor: pointer;
-            position: absolute;
-            top: 45%;
-            color: black;
-            background-color: rgba(255, 255, 255, 0.577);
-            padding: 8px 19px;
-            border-radius: 50% ;
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .prev{
-            left: 1%;
-        }
-        .next{
-            right: 1%;
-        }
-        .slide{
-            display: none;
-            
-        }
+ 
+
         .write{
             position: absolute;
             right: 85px;
@@ -157,7 +174,6 @@
             width: 40%;
             height: 175px;
             bottom: 165px;
-            /* border: 2px solid red; */
         }
         .primary{
             color: #2f2626;
@@ -210,28 +226,28 @@
             width: 200px;
             height: 25px;
             box-sizing: border-box;
+            font-size: 1.0rem;
             border: 2px solid rgb(36, 36, 36);
             border-radius: 4px;
             background-color: #e4e4e4;
             background-image: url("{% static 'Images/searchicon.png' %}");
             background-position: 8px -2px;
             background-repeat: no-repeat;
-            padding: 12px 20px 12px 40px;
+            padding: 12px 15px 12px 40px;
             transition: width 0.4s ease-in-out;
         }
         .search input:focus{
             width: 400px;
         }
-        .btun{
-            margin-top: 5px;
+        .btn{
             border-radius: 4px;
-            padding: 2px 6px;
+            padding: 5px 20px;
             font-size: 0.95rem;
             background-color: #4f4f4f;
             color: white;
             border: 2px solid rgb(0, 0, 0);
         }
-        .btun:hover{
+        .btn:hover{
             background-color: #d64d4d;
             cursor: pointer;
             transition: all ease 0.3s;
@@ -289,7 +305,7 @@
         }
         .item h1{
             text-align: center;
-            margin-top: 8px;
+            margin-top: 15px;
             margin-bottom: 3px;
             font-family: 'Kanit', sans-serif;
             color: rgb(46, 45, 45);
@@ -299,8 +315,8 @@
             margin-top: 3px;
             text-align: center;
             font-size: 1rem;
-            font-weight: 600;
-            font-family: 'Lato', sans-serif;
+            font-weight: 500;
+            font-family: 'Kanit', sans-serif;
             color: #4b4b4b;
         }
         /* services */
@@ -376,7 +392,7 @@
         .part::before{
             content: "";
             position: absolute;
-            background: url({% static 'Images/backpart.jpg' %}) no-repeat center center/cover;
+            background: url({% static 'Images/backpart.jpg' %}) no-repeat center center/cover ;
             height: 200px;
             width: 100%;
             opacity: 0.8;
@@ -417,6 +433,7 @@
 
         footer{
             width: 100%;
+            overflow: hidden;
             height: 400px;
             border: 2px solid grey;
         }
@@ -471,6 +488,7 @@
         }
         .partition1 input{
             height: 35px;
+            padding: 2px 10px;
             border-radius: 2px;
             border: 2px solid grey;
         }
@@ -504,6 +522,13 @@
         #offer{
             width: 15%;
         }
+        #offer>a{
+            transition: all 0.5s ease;
+            color: grey;
+        }
+        #offer>a:hover{
+            text-decoration: underline;
+        }
         .partition h3{
             font-family: 'Kanit', sans-serif;
             font-weight: bold;
@@ -512,28 +537,52 @@
 
         .partition h4{
             color: grey;
+            font-weight: 100;
             text-align: justify;
         }
         #self{
             width: 70%;
             padding: 25px;
         }
+        /* loading screen */
+        #loading-overlay {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; 
+            transition: opacity 0.5s ease;
+            opacity: 1; /* Initially visible */
+            pointer-events: auto;
+        }
+        .overlay-hidden #loading-overlay {
+            opacity: 0;
+            pointer-events: none; /* Prevent interactions with hidden overlay */
+        }
+
+    .loading-spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid #ffffff;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        animation: spin 1s linear infinite;
+    }   
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
 </style>
-<body onload="slideshow(0)">
+<body>
+
     <nav>
-        <section class="box1">
-            <span>
-                <a href="#">
-                    <img src="{% static 'Images\user.png' %}" alt="">
-                </a>
-            </span>
-            <span>
-                <a href="#">
-                    <img src="{% static 'Images\notification.png' %}" alt="">
-                </a>
-            </span>
-            
-        </section>
         <section class="box" id="mainnav">
             <div class="content">
                 <ul>
@@ -543,7 +592,7 @@
                 </ul>
             </div>
             <div class="content">
-                <a href="home">
+                <a href="/">
                     <img src="{% static 'Images\logo.png' %}" alt="">
                 </a>
             </div>
@@ -555,18 +604,12 @@
                 </ul>
             </div>
         </section>
-        <section class="box1" id="atchull">
-            <span class="chull">
-                <a href="#">
-                    <img src="{% static 'Images\abt us.png' %} " alt="">
-                </a>
-            </span>
-        </section>
+
     </nav>
-    <!--Image cont  -->
+    <!--Image cont  -->    
     <div class="cont">
+        <div class="line">We will compare prices from different websites for you, just relax.</div>
         <div class="slide">
-            <div class="line">We will compare prices from different websites for you, just relax.</div>
             <img src="{% static 'Images\bg1.jpg' %}" alt="">
             <div class="write">
                <h1 class="primary">
@@ -580,11 +623,10 @@
                         </button>
                     </a>
                 </div>
-            </div>
-    </div>
+        </div>
+
         <div class="slide">
-            <div class="line">We will compare prices from different websites for you, just relax.</div>
-            <img src="{% static 'Images\bg2.jpg' %}" alt="">
+            <img src="{% static 'Images\bg3.jpg' %}" alt="">
             <div class="write">
                <h1 class="primary">
                    Shop Now<br> 
@@ -597,11 +639,10 @@
                         </button>
                     </a>
                 </div>
-            </div>
-    </div>
+        </div>
+    
         <div class="slide">
-            <div class="line">We will compare prices from different websites for you, just relax.</div>
-            <img src="{% static 'Images\bg3.jpg' %}" alt="">
+            <img src="{% static 'Images\bg4.jpg' %}" alt="">
             <div class="write">
                <h1 class="primary" id="diff">
                    Cool gadgets<br> 
@@ -614,11 +655,10 @@
                         </button>
                     </a>
                 </div>
-            </div>
-    </div>
+        </div>
+
         <div class="slide">
-            <div class="line">We will compare prices from different websites for you, just relax.</div>
-            <img src="{% static 'Images\bg4.jpg' %}" alt="">
+            <img src="{% static 'Images\bg5.jpg' %}" alt="">
             <div class="write">
                <h1 class="primary">
                    Hello Kids<br> 
@@ -631,14 +671,24 @@
                         </button>
                     </a>
                 </div>
-            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'Images\bg1.jpg' %}" alt="">
+            <div class="write">
+               <h1 class="primary">
+                   Hello Kids<br> 
+               </h1>
+               <h2 class="sec">We have something for you</h2>
+               <br>
+                    <a href="#" class="btna">
+                        <button class="btn">
+                            Explore
+                        </button>
+                    </a>
+                </div>
+        </div>
     </div>
-    <span class="arrwo prev" onclick="controller(-1)">
-        &#10094;
-    </span><span class="arrwo next" onclick="controller(1)">
-        &#10095;
-    </span>
-    <script src="script.js"></script>
+
 <!-- SEARCH -->
     <div class="srch">
         <div class="head">
@@ -648,10 +698,52 @@
             We are providing you the priviledge of compairing the prices of any product from different different e-commerce websites at one place.
         </div>
         <div class="search">
-        <form action="search" method="POST">
-        {% csrf_token %}
-        <input type="text" name="text" placeholder="Name of product">  
-        <button class="btun" id="buttonn">Search</button></form>
+        <!-- <form action="search" id="search-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="text" placeholder="Name of product">  
+            <button class="btn" onclick="showLoadingOverlay()" id="buttonn">Search</button>
+        </form>
+
+        <div id="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
+
+        <script>
+            function showLoadingOverlay(){
+                document.getElementById('loading-overlay').style.display = 'flex';
+                setTimeout(function() {
+                    document.getElementById('loading-overlay').style.display = 'none';
+                }, 10000);
+            }
+        </script> -->
+        <form action="search" id="search-form" method="POST">
+            {% csrf_token %}
+            <input type="text" name="text" placeholder="Name of product">  
+            <button class="btn" id="buttonn">Search</button>
+        </form>
+        
+        <!-- Loading overlay -->
+        <div id="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
+        
+        <script>
+            const loadingOverlay = document.getElementById('loading-overlay');
+            const searchForm = document.getElementById('search-form');
+        
+            searchForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent form submission
+        
+                // Show the loading overlay
+                loadingOverlay.style.display = 'flex';
+        
+                // Simulate a delay before submitting the form
+                setTimeout(function() {
+                    searchForm.submit(); // Submit the form after the delay
+                }, 1000); // Simulate a 1-second delay
+            });
+        </script>
+        
         </div>
         <div>
         </div>
@@ -667,9 +759,9 @@
     </div>
     <div class="prod">
         <div class="item">
-            <a href="https://www.flipkart.com/asian-innova-01-white-sports-walking-training-running-shoes-men/p/itm1faef5e988e03?pid=SHOGAC6G9KHT2C2Z&lid=LSTSHOGAC6G9KHT2C2Z7FMKJK&marketplace=FLIPKART&q=shoes&store=osp&srno=s_1_1&otracker=search&otracker1=search&fm=Search&iid=en_2eLyWSyiqbYuWgeetlpw3LD1%2BX1bRDf2XxqgcxeX8V9X7%2B12cqtfwXYme5XmhWKRQmvH%2FmrTAC4rnw5L40KIGw%3D%3D&ppt=sp&ppn=sp&ssid=ixn7dvbfzk0000001653888461737&qH=b0a8b6f820479900">
-                <img src="https://rukminim2.flixcart.com/image/580/696/kyxb9u80/shoe/5/v/8/8-innova-01cwht-8-asian-white-original-imagbfzmrmmvkqhv.jpeg?q=50" alt="#">
-                <h1 class="sec">shoes</h1>
+            <a href="https://www.flipkart.com/footwear/mens-footwear/~cs-6p3gzp6dze/pr?sid=osp%2Ccil&p%5B%5D=facets.discount_range_v1%255B%255D%3D50%2525%2Bor%2Bmore&hpid=OsVuAm-DePhzP9qDKGoJzqp7_Hsxr70nj65vMAAFKlc%3D&ctx=eyJjYXJkQ29udGV4dCI6eyJhdHRyaWJ1dGVzIjp7InZhbHVlQ2FsbG91dCI6eyJtdWx0aVZhbHVlZEF0dHJpYnV0ZSI6eyJrZXkiOiJ2YWx1ZUNhbGxvdXQiLCJpbmZlcmVuY2VUeXBlIjoiVkFMVUVfQ0FMTE9VVCIsInZhbHVlcyI6WyJNaW4uLiA1MCUgT2ZmIl0sInZhbHVlVHlwZSI6Ik1VTFRJX1ZBTFVFRCJ9fSwiaGVyb1BpZCI6eyJzaW5nbGVWYWx1ZUF0dHJpYnV0ZSI6eyJrZXkiOiJoZXJvUGlkIiwiaW5mZXJlbmNlVHlwZSI6IlBJRCIsInZhbHVlIjoiU0hPRzJDSEhRWlZCQ1paTiIsInZhbHVlVHlwZSI6IlNJTkdMRV9WQUxVRUQifX0sInRpdGxlIjp7Im11bHRpVmFsdWVkQXR0cmlidXRlIjp7ImtleSI6InRpdGxlIiwiaW5mZXJlbmNlVHlwZSI6IlRJVExFIiwidmFsdWVzIjpbIkFESURBUywgUFVNQSAmIG1vcmUiXSwidmFsdWVUeXBlIjoiTVVMVElfVkFMVUVEIn19fX19&fm=neo%2Fmerchandising&iid=M_b3f79dee-1a69-4c84-8950-07c06260d92b_8.APHNXHKXOYT6&ppt=hp&ppn=homepage&ssid=jz9pbhsw340000001691232393251&otracker=hp_omu_Top%2BDeals%2Bon%2BFashion_3_8.dealCard.OMU_APHNXHKXOYT6_7&otracker1=hp_omu_PINNED_neo%2Fmerchandising_Top%2BDeals%2Bon%2BFashion_NA_dealCard_cc_3_NA_view-all_7&cid=APHNXHKXOYT6">
+                <img src="https://rukminim2.flixcart.com/image/200/200/xif0q/shoe/q/h/9/-original-imaggcb4rstbv9uc.jpeg?q=70" alt="#">
+                <h1 class="sec">Shoes</h1>
             </a>
             <h3>Some kick-ass shoes are waiting for you</h3>
         </div>
@@ -683,14 +775,14 @@
         <div class="item">
             <a href="https://www.bewakoof.com/p/melting-deadpool-lightweight-adjustable-strap-men-slider-dpl">
                 <img src="https://images.bewakoof.com/t320/melting-deadpool-lightweight-adjustable-strap-men-s-slider-dpl-352228-1640357878-1.jpg" alt="#">
-                <h1 class="sec">slippers</h1>
+                <h1 class="sec">Slippers</h1>
             </a>
             <h3>Here are some amazing slippers and sliders</h3>
         </div>
         <div class="item">
             <a href="https://www.flipkart.com/7-days-beard-oil-hair-growth-moustache-men-21-vital-ingredients-essential-oils-grow-thick-fuller/p/itm686246b875c27?pid=HOLFZHCWGHKQSJKE&lid=LSTHOLFZHCWGHKQSJKE7WPJIG&marketplace=FLIPKART&q=beard&store=g9b&srno=s_1_4&otracker=search&otracker1=search&fm=Search&iid=54ce7f89-23de-483c-929b-bce136031b4c.HOLFZHCWGHKQSJKE.SEARCH&ppt=sp&ppn=sp&ssid=1kvs3h3t280000001653888831757&qH=d8355948568f2e85">
                 <img src="https://rukminim2.flixcart.com/image/612/612/kwtkxow0/hair-oil/y/w/z/30-beard-oil-for-beard-hair-growth-and-moustache-for-men-with-21-original-imag9ewaqezncmng.jpeg?q=70" alt="#">
-                <h1 class="sec">men's Grooming</h1>
+                <h1 class="sec">Men's Grooming</h1>
             </a>
             <h3>Some issentials for men to groom themsekves.</h3>
         </div>
@@ -709,28 +801,28 @@
             </div>
         </div>
     <div class="prod">
-        <div class="item1">
+        <div class="item">
             <a href="https://www.snapdeal.com/product/x20-white-cotton-blend-slim/5764608180843593628#bcrumbSearch:formal%20sirts">
                 <img src="https://n2.sdlcdn.com/imgs/k/h/i/230X258_sharpened/x20-Black-Cotton-Blend-Slim-SDL219472462-1-c6783.webp" alt="#">
                 <h1 class="sec">Shirts</h1>
             </a>
             <h3>Some authentic formal shirts</h3>
         </div>
-        <div class="item1">
+        <div class="item">
             <a href="https://www.bewakoof.com/search/avengers?ga_q=avengers1">
                 <img src="https://images.bewakoof.com/t320/avengers-all-stars-avl-men-s-printed-round-neck-varsity-h-s-t-shirt-355394-1622091537.jpg" alt="#">
                 <h1 class="sec">Merchandise</h1>
             </a>
             <h3>Avengers assemble! Some official merchandise for you</h3>
         </div>
-        <div class="item1">
+        <div class="item">
             <a href="https://www.bewakoof.com/p/cuteness-spell-boyfriend-t-shirt">
                 <img src="https://images.bewakoof.com/t320/cuteness-spell-boyfriend-t-shirt-503832-1653666384-1.jpg" alt="#">
                 <h1 class="sec">Women Section</h1>
             </a>
             <h3>Girls, get ready to witness these outfits</h3>
         </div>
-        <div class="item1">
+        <div class="item">
             <a href="https://www.snapdeal.com/product/bad-boys-ethnic-wear-outfit/8070451194951066213#bcrumbSearch:kids%20outfits">
                 <img src="https://n1.sdlcdn.com/imgs/j/r/0/230X258_sharpened/Bad-Boys-Ethnic-wear-Outfit-SDL092518282-1-c96f4.jpeg" alt="#">
                 <h1 class="sec">Kid Section</h1>
