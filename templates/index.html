@@ -212,7 +212,6 @@
             margin: 15px;
             margin-top: 8px;
             margin-bottom: 8px;
-            font-size: 3rem;
             font-family: 'Kanit', sans-serif;
             font-weight: 200;
         }
@@ -565,19 +564,40 @@
             pointer-events: none; /* Prevent interactions with hidden overlay */
         }
 
-    .loading-spinner {
-        border: 4px solid rgba(255, 255, 255, 0.3);
-        border-top: 4px solid #ffffff;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        animation: spin 1s linear infinite;
-    }   
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #ffffff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }   
 
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Typing effect */
+        .typewriter h1 {
+            overflow: hidden;
+            border-right: 0.09em solid #ff0000;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 2s steps(40, end), blink-caret .75s step-end infinite; 
+            transition: transform 0.5s ease;   
+        }
+
+        /* The typing effect */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #ff0000 }
+        }
 
 </style>
 <body>
@@ -611,115 +631,43 @@
         <div class="line">We will compare prices from different websites for you, just relax.</div>
         <div class="slide">
             <img src="{% static 'Images\bg1.jpg' %}" alt="">
-            <div class="write">
-               <h1 class="primary">
-                   Trending Items<br> 
-               </h1>
-               <h2 class="sec">at resonable prices</h2>
-               <br>
-                    <a href="#" class="btna">
-                        <button class="btn">
-                            Explore
-                        </button>
-                    </a>
-                </div>
         </div>
 
         <div class="slide">
             <img src="{% static 'Images\bg3.jpg' %}" alt="">
-            <div class="write">
-               <h1 class="primary">
-                   Shop Now<br> 
-               </h1>
-               <h2 class="sec">Amazing deals are going on</h2>
-               <br>
-                    <a href="#" class="btna">
-                        <button class="btn">
-                            Explore
-                        </button>
-                    </a>
-                </div>
         </div>
     
         <div class="slide">
             <img src="{% static 'Images\bg4.jpg' %}" alt="">
-            <div class="write">
-               <h1 class="primary" id="diff">
-                   Cool gadgets<br> 
-               </h1>
-               <h2 class="sec" id="diff2">Grab them to look fab</h2>
-               <br>
-                    <a href="#" class="btna">
-                        <button class="btn">
-                            Explore
-                        </button>
-                    </a>
-                </div>
         </div>
 
         <div class="slide">
             <img src="{% static 'Images\bg5.jpg' %}" alt="">
-            <div class="write">
-               <h1 class="primary">
-                   Hello Kids<br> 
-               </h1>
-               <h2 class="sec">We have something for you</h2>
-               <br>
-                    <a href="#" class="btna">
-                        <button class="btn">
-                            Explore
-                        </button>
-                    </a>
-                </div>
         </div>
         <div class="slide">
             <img src="{% static 'Images\bg1.jpg' %}" alt="">
-            <div class="write">
-               <h1 class="primary">
-                   Hello Kids<br> 
-               </h1>
-               <h2 class="sec">We have something for you</h2>
-               <br>
-                    <a href="#" class="btna">
-                        <button class="btn">
-                            Explore
-                        </button>
-                    </a>
-                </div>
         </div>
     </div>
 
 <!-- SEARCH -->
     <div class="srch">
-        <div class="head">
-            SpiderMonkey
+        <div>
+            <div class="tw" id="title">
+                <h1 class="head">
+                    SpiderMonkey
+                </h1>
+            </div>
         </div>
+
         <div class="secondary">
             We are providing you the priviledge of compairing the prices of any product from different different e-commerce websites at one place.
         </div>
         <div class="search">
-        <!-- <form action="search" id="search-form" method="POST">
-            {% csrf_token %}
-            <input type="text" name="text" placeholder="Name of product">  
-            <button class="btn" onclick="showLoadingOverlay()" id="buttonn">Search</button>
-        </form>
-
-        <div id="loading-overlay">
-            <div class="loading-spinner"></div>
-        </div>
-
-        <script>
-            function showLoadingOverlay(){
-                document.getElementById('loading-overlay').style.display = 'flex';
-                setTimeout(function() {
-                    document.getElementById('loading-overlay').style.display = 'none';
-                }, 10000);
-            }
-        </script> -->
+       
         <form action="search" id="search-form" method="POST">
             {% csrf_token %}
             <input type="text" name="text" placeholder="Name of product">  
-            <button class="btn" id="buttonn">Search</button>
+            <button class="btn" onclick="titleChange()" id="buttonn">Search</button>
         </form>
         
         <!-- Loading overlay -->
@@ -729,19 +677,21 @@
         
         <script>
             const loadingOverlay = document.getElementById('loading-overlay');
-            const searchForm = document.getElementById('search-form');
-        
-            searchForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent form submission
-        
-                // Show the loading overlay
-                loadingOverlay.style.display = 'flex';
-        
-                // Simulate a delay before submitting the form
-                setTimeout(function() {
-                    searchForm.submit(); // Submit the form after the delay
-                }, 1000); // Simulate a 1-second delay
-            });
+            const title = document.querySelector('.head');
+            function titleChange() {
+                const titleDiv = document.getElementById('title');
+                const parent = titleDiv.parentElement;
+                parent.removeChild(titleDiv);
+                parent.appendChild(titleDiv);
+                title.textContent = "Please Wait, Searching...";
+                titleDiv.classList.remove('tw'); 
+                titleDiv.classList.add('typewriter');
+
+            }
+            window.onload = function() {
+                document.getElementById('loading-overlay').style.display = 'none';
+            };
+
         </script>
         
         </div>
